@@ -13,14 +13,14 @@ class CreateCategoryUseCase {
     this.#categoriesRepository = categoriesRepository
   }
 
-  execute({ name, description }: IRequest) {
-    const category = this.#categoriesRepository.findByName(name)
+  async execute({ name, description }: IRequest) {
+    const category = await this.#categoriesRepository.findByName(name)
 
     if (category) {
       throw new Error("Category alread exists.")
     }
 
-    this.#categoriesRepository.create({ name, description })
+    await this.#categoriesRepository.create({ name, description })
   }
 }
 

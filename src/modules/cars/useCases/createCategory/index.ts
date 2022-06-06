@@ -1,9 +1,15 @@
-import { CategoriesRepository } from '../../repositories/implementatios/CategoriesRepository';
-import { CreateCategoryController } from './CreateCategoryController';
-import { CreateCategoryUseCase } from './CreateCategoryUseCase';
+import { CategoriesRepository } from '../../repositories/implementatios/CategoriesRepository'
+import { CreateCategoryController } from './CreateCategoryController'
+import { CreateCategoryUseCase } from './CreateCategoryUseCase'
 
-const categoriesRepository = CategoriesRepository.instance
-const createCategoryUseCase = new CreateCategoryUseCase(categoriesRepository)
-const createCategoryController = new CreateCategoryController(createCategoryUseCase)
+function controller() {
+	const categoriesRepository = new CategoriesRepository()
+	const createCategoryUseCase = new CreateCategoryUseCase(categoriesRepository)
+	const createCategoryController = new CreateCategoryController(
+		createCategoryUseCase
+	)
 
-export { createCategoryController }
+	return createCategoryController
+}
+
+export default controller
